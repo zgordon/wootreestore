@@ -1,0 +1,42 @@
+@mixin mq($breakpoint: $media-tablet)
+  @media all and (min-width: $breakpoint)
+    @content
+
+@mixin hide-text
+  text-indent: 100%
+  white-space: nowrap
+  overflow: hidden
+
+@mixin animation($animation_name, $duration, $delay: null, $iteration: 1, $timing-function: linear, $fill-mode: forwards)
+  -ms-animation-name: $animation_name
+  -ms-animation-duration: $duration
+  -ms-animation-delay: $delay
+  -ms-animation-iteration-count: $iteration
+  -ms-animation-fill-mode: $fill-mode
+  -ms-animation-timing-function: $timing-function
+  -moz-animation-name: $animation_name
+  -moz-animation-duration: $duration
+  -moz-animation-delay: $delay
+  -moz-animation-iteration-count: $iteration
+  -moz-animation-fill-mode: $fill-mode
+  -moz-animation-timing-function: $timing-function
+  -webkit-animation-name: $animation_name
+  -webkit-animation-duration: $duration
+  -webkit-animation-delay: $delay
+  -webkit-animation-iteration-count: $iteration
+  -webkit-animation-fill-mode: $fill-mode
+  -webkit-animation-timing-function: $timing-function
+  animation-name: $animation_name
+  animation-duration: $duration
+  animation-delay: $delay
+  animation-iteration-count: $iteration
+  animation-fill-mode: $fill-mode
+  animation-timing-function: $timing-function
+
+@mixin keyframe($animation_name)
+  @-moz-keyframes #{$animation_name}
+    @content
+  @-webkit-keyframes #{$animation_name}
+    @content
+  @keyframes #{$animation_name}
+    @content

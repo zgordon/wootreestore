@@ -1,0 +1,657 @@
+// Variables and mixins
+@import compass/css3
+@import variables
+@import mixins
+@import animation
+
+// Foundation Overrides
+// --------------------------------------------------------
+
+// Grid Overrides
+.no-max // Adjusting the row width to allow for full width
+  max-width: 100%
+.no-max.pad // making it so certain elements have full width, and some breathing room
+  padding-left: 10px
+  padding-right: 10px
+.content-pad
+  padding-top: 40px
+  padding-bottom: 40px
+// Typography Overrides
+@import url(http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic)
+
+body
+  font-size: 62.5%
+  letter-spacing: .025em
+
+body, h1, h2, h3, h4, h5, h6
+  font-family: $font !important
+  line-height: 1.15em
+h1, h2, h3
+  font-weight: 700
+
+// Global Stuff (icons, styles, etc)
+// --------------------------------------------------------
+.social-links
+  list-style: none
+  padding: 0
+  margin: 0
+  li
+    display: inline-block
+    margin: 0 3px
+  .icon
+    display: block
+    width: 20px
+    height: 20px
+    +border-radius(2px)
+    +background-size(20px 20px !important)
+    overflow: hidden
+    opacity: 1
+    +transition(opacity 500ms ease-in-out)
+    &:hover
+      opacity: .7
+      +transition(opacity 200ms ease-in-out)
+    &.icon-twitter
+      background: url(image-url("icon-twitter.png", image)) no-repeat 0 0
+    &.icon-facebook
+      background: url(image-url("icon-facebook.png", image)) no-repeat 0 0
+    &.icon-google
+      background: url(image-url("icon-google.png", image)) no-repeat 0 0
+    &.icon-tumblr
+      background: url(image-url("icon-tumblr.png", image)) no-repeat 0 0
+    &.icon-vimeo
+      background: url(image-url("icon-vimeo.png", image)) no-repeat 0 0
+    &.icon-youtube
+      background: url(image-url("icon-youtube.png", image)) no-repeat 0 0
+    &.icon-linkedin
+      background: url(image-url("icon-linkedin.png", image)) no-repeat 0 0
+    &.icon-email
+      background: url(image-url("icon-email.png", image)) no-repeat 0 0
+    &.icon-flickr
+      background: url(image-url("icon-flickr.png", image)) no-repeat 0 0
+    &.icon-github
+      background: url(image-url("icon-octocat.png", image)) no-repeat 0 0
+
+
+// Heading & Navigation
+// --------------------------------------------------------
+// Logo/Lettermark
+header
+  padding: 20px 19px !important
+  height: 100px
+  h1
+    float: left
+    margin: 0
+    width: 60px
+    &.open
+      position: fixed
+      top: 20px
+      left: 20px
+      // @include animation(logo-fade, 200ms, ease, 1)
+    a
+      background: #384047
+      +border-radius(2px)
+      color: #fff
+      display: block
+      width: 60px
+      height: 60px
+      margin: 0
+      padding: 0
+      text-align: center
+      font-size: 25px
+      line-height: 60px
+      font-weight: 700
+      +transition(all 300ms ease-in-out)
+      &:hover
+        background: #2d3339
+        color: #fff
+  nav
+    h1.open
+      background: #fff
+      top: 0
+      left: 0
+      right: 0
+      width: 100%
+      padding: 20px 20px 0
+      z-index: 101
+      a
+        margin: 0
+
+
+// Navigation
+nav
+  display: none
+  background: rgba(#fff, .98)
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  z-index: 100
+  overflow: scroll
+  +mq($medium-break)
+    overflow: visible
+  & > ul
+    margin: 100px auto 0 !important
+    text-align: center
+    max-width: 300px
+    +mq($medium-break)
+      margin: 100px 0 20px
+      max-width: 100%
+      text-align: center
+    & > li
+      display: block
+      position: relative
+      +mq($medium-break)
+        display: inline-block
+        margin: 0 15px
+        vertical-align: top
+      +mq($large-break)
+        margin: 0 50px
+      & > a
+        font-size: 1.4em
+        font-weight: 700
+        padding: 10px 20px
+        display: block
+        &:hover
+          color: rgba($dark, .8)
+        +mq($medium-break)
+          line-height: 60px
+          font-size: 1.6em
+  .sub-menu
+    display: block
+    margin: -10px 0 20px !important
+    a
+      font-size: 1em
+      display: block
+      padding: 5px 20px
+      +mq($medium-break)
+        padding: 5px 0
+      &:hover
+        color: rgba($dark, .8)
+  // Standard Nav View
+  +mq($medium-break)
+    overflow: visible
+
+
+
+.nav-toggle
+  background: rgba(#fff, .5)
+  height: 50px
+  width: 60px
+  display: block
+  z-index: 102
+  position: fixed
+  top: 25px
+  right: 19px
+  opacity: .3
+  +transition(opacity 100ms ease-in-out)
+  &:hover
+    opacity: 1
+  +hide-text
+  span,
+  span:before,
+  span:after
+    display: block
+    cursor: pointer
+    height: 5px
+    width: 40px
+    background: $dark
+    position: absolute
+    display: block
+    content: ''
+    left: 0
+    +border-radius(2px)
+    +transition(all 100ms ease-in-out)
+  span
+    top: 23px
+    left: 10px
+    &:before
+      top: -12px
+    &:after
+      bottom: -12px
+    &:hover
+      span
+        &:before
+          top: -15px
+        &:after
+          bottom: -15px
+  &.open
+    opacity: 1
+    span
+      background: none
+      &:before
+        +transform(rotate(45deg))
+        top: 0
+        left: 0
+        background: $red
+      &:after
+        +transform(rotate(-45deg))
+        bottom: 0
+        left: 0
+        background: $red
+
+
+// Site Footer
+// --------------------------------------------------------
+.footer-clear
+  display: block
+  height: 60px
+  clear: both
+  width: 100%
+footer
+  background: rgba(255,255,255,.9)
+  position: relative
+  bottom: 0
+  padding-bottom: 10px
+  +transition(background 600ms ease-in-out)
+  &:hover
+    background: rgba(255,255,255,1)
+    +transition(background 200ms ease-in-out)
+  +mq($medium-break)
+    padding-top: 10px
+    position: fixed
+    box-shadow: 0 -1px 0 0 #eee
+
+  p
+    margin: 0
+    color: lighten($dark, 55%)
+    font-size: 1.2em
+    line-height: 20px
+    text-align: center
+    +mq($medium-break)
+      float: right
+      width: auto
+      text-align: right
+  .social-links
+    text-align: center
+    height: 20px
+    width: 100%
+    margin-bottom: 10px
+    +mq($medium-break)
+      margin-left: 5px
+      margin-bottom: 0
+      float: left
+      text-align: left
+      width: auto
+
+
+// Orbit Slider
+// --------------------------------------------------------
+.carousel-wrap
+  .carousel
+    img
+      margin: 0 auto
+  .orbit-bullets-container
+    position: absolute
+    bottom: 10px
+    width: 100%
+    .orbit-bullets
+      margin: 0 auto !important
+      top: 0 !important
+      li
+        background: rgba(#fff, .3)
+        &.active
+          background: rgba(#fff, .7)
+
+// Layout Elements
+// --------------------------------------------------------
+
+// Grid
+.grid-item
+  position: relative
+  padding-top: 20px
+
+// Two Column
+.two-column
+  .secondary
+    border-top: 1px solid $border
+    padding-top: 20px
+    +mq($medium-break)
+      max-width: 32.5em
+  .primary
+    max-width: 68.5em
+// Page Leader
+.leader
+  margin-top: 20px
+  margin-bottom: 40px
+  +mq($medium-break)
+    margin-top: 80px
+    margin-bottom: 80px
+  p
+    font-size: 2em
+
+// Feature
+.feature,
+.flip-flop
+  hr
+    margin: 0 10px 40px
+    +mq($medium-break)
+      margin: 0 0 80px
+.feature
+  margin-top: 80px
+  margin-bottom: 80px
+  .img-wrap
+    display: block
+    max-width: 200px
+    margin: 20px auto
+  .item
+    margin-bottom: 40px
+
+.flip-flop
+  margin-top: 80px
+  margin-bottom: 80px
+  .flip-flop-left,
+  .flip-flop-right
+    clear: both
+    overflow: hidden
+    margin-bottom: 80px
+
+// Avatar
+// --------------------------------------------------------
+.avatar
+  display: inline-block
+  border-radius: 500px
+  overflow: hidden
+  width: 160px
+  height: 160px
+  vertical-align: middle
+  margin: 0 0 20px
+  img
+    display: block
+  &.small
+    width: 24px
+    height: 24px
+    margin: 0 5px 0 0
+  &.large
+    width: auto
+    height: auto
+    max-width: 100%
+    max-height: 100%
+
+// Form Styling
+// --------------------------------------------------------
+.form-item
+  display: block
+  margin: 0 0 30px
+  .note
+    color: lighten($dark, 60%)
+    font-size: 12px
+    float: right
+    position: relative
+    top: 2px
+    right: 2px
+  .message
+    display: none
+
+.form-success
+  border-top: 1px solid $border
+  margin-top: 20px
+  padding-top: 20px
+  +mq($medium-break)
+    margin-top: 40px
+    padding-top: 60px
+
+label
+  display: block
+  font-size: 1.8em
+  margin: 0 0 10px
+  color: $dark
+
+input,
+textarea,
+button
+  outline: none
+  font-family: $font
+  +border-radius(2px)
+  +appearance(none)
+input,
+textarea
+  background: #fff
+  border: none
+  color: $dark
+  display: block
+  font-size: 2em
+  line-height: 2em
+  padding: 10px
+  width: 100%
+  +box-shadow(inset 0 0 0 2px darken($border,10%))
+  +transition(box-shadow 200ms ease-in-out)
+  +box-sizing(border-box)
+  &:hover
+    +box-shadow(inset 0 0 0 2px darken($border, 30%))
+  &:focus
+    +box-shadow(inset 0 0 0 2px $dark)
+
+// Buttons
+.btn
+  display: inline-block
+  background: $dark
+  font-size: 1.6em
+  color: #fff
+  padding:  12px 18px
+  +border-radius(2px)
+  &:hover
+    background: $darker
+    color: #fff
+  &:active
+    background: lighten($darker, 20%)
+  &.large
+    font-size: 2em
+    padding: 18px 24px
+  &.ghost
+    background: transparent
+    color: $dark
+    +box-shadow(inset 0 0 0 2px $dark)
+    +transition(opacity 200ms ease-in-out)
+    &:hover
+      opacity: .9
+    &:active
+      color: lighten($dark, 30%)
+
+// Error Styling
+.form-item
+  &.error
+    input
+      +box-shadow(inset 0 0 0 3px $red)
+    .message
+      margin: 10px 0
+      display: block
+      font-size: 1.6em
+      font-style: italic
+      &.error
+        color: $red
+
+
+// Contact Form
+.contact-form
+  border-top: 1px solid $border
+  margin: 40px 0 0
+  padding: 40px 10px 0
+
+
+// Portfolio Item
+// --------------------------------------------------------
+.work-item
+  margin-bottom: 20px
+
+// Blog
+// --------------------------------------------------------
+
+// Article Layouts
+article
+  margin-bottom: 60px
+  padding-top: 20px
+  border-top: 1px solid $border
+  &:last-child
+    border-bottom: 0px
+
+// Pagination
+.page-nav
+  li
+    display: inline-block
+    margin-right: 10px
+    a
+      background: $border
+      padding: 10px
+      +transition(all 200ms ease-in-out)
+      +border-radius(2px)
+      &:hover
+        background: $dark
+        color: #fff
+// Blog Type Styles
+article
+  h1,h2, h3, h4, p, blockquote
+    font-family: $font
+    color: #384047
+  h1
+    font-size: 28px
+    line-height: 36px
+    font-weight: 700
+    margin-bottom: 20px
+    +mq($medium-break)
+      font-size: 40px
+      line-height: 48px
+  h2
+    font-size: 20px
+    line-height: 26px
+    font-weight: 400
+    margin-bottom: 20px
+    +mq($medium-break)
+      font-size: 24px
+      line-height: 32px
+  h3
+    font-size: 20px
+    font-weight: 700
+  p
+    font-size: 1.8em
+    font-weight: 300
+    margin-bottom: 30px
+  blockquote
+    border-left: 3px solid #c6ccd2
+    font-size: 24px
+    font-weight: 400
+    padding: 0 0 5px 20px
+    margin: 0 0 32px -23px
+    font-style: italic
+  .img-container
+    margin: 0 0 20px
+    p
+      font-size: 12px
+      color: rgba(lighten($dark, 55%), .8)
+      font-style: italic
+      text-align: right
+      position: relative
+      top: -21px
+      left: -7px
+      margin: 0
+    +mq($large-break)
+      &.expanded
+        margin-left: -90px
+        margin-right: -90px
+
+.post-meta
+  margin-top: -10px
+  margin-bottom: 40px
+  li
+    display: inline-block
+  a, li
+    color: #c6ccd2
+  a:hover
+    color: #b2bac2
+  .author a
+    padding: 5px 0
+
+// Sidebar Modules
+.secondary
+  div[class*="module"]
+    margin-bottom: 40px
+    overflow: hidden
+  .module-heading
+    font-size: 1.8em
+    font-weight: 700
+    margin: 0 0 10px
+  // Category Module
+  .module-category
+    ul
+      margin: 0
+    li
+      margin: 0 5px 10px 0
+      display: inline-block
+      a
+        background: $border
+        display: inline-block
+        padding: 6px 10px
+        +border-radius(2px)
+        font-size: 14px
+        +transition(all 200ms ease-in-out)
+        &:hover
+          background: $dark
+          color: #fff
+  // Search Module
+  .module-search
+    .form-item
+      margin: 0 20px 0 0
+    input
+      font-size: 1.6em
+      line-height: 20px
+      font-family: $font
+      padding:  10px
+      margin: 0
+      +box-sizing(border-box)
+      &:hover
+        +box-shadow(inset 0 0 0 2px darken($border, 20%))
+      &:focus
+        +box-shadow(inset 0 0 0 2px $dark)
+    ::-webkit-input-placeholder
+      font-weight: 400
+      color: #c6ccd2
+    // Firefox 18-
+    \:-moz-placeholder
+      font-weight: 400
+      color: #c6ccd2
+    // Firefox 19+
+    ::-moz-placeholder
+      font-weight: 400
+      color: #c6ccd2
+    \:-ms-input-placeholder
+      font-weight: 400
+      color: #c6ccd2
+
+// Author Layout
+.author-bio
+  .avatar
+    margin: 20px auto 40px
+    display: block
+    +mq($medium-break)
+      margin: 20px 0 40px
+  h1
+    font-size: 3em
+    margin: 0 0 20px
+  .social-links
+    margin: 20px 0 0
+    li
+      margin: 0 6px 6px 0
+    a
+      opacity: .3
+      &:hover
+        opacity: 1
+.article-list
+  h2
+    border-top: 1px solid $border
+    font-size: 18px
+    margin: 0
+    color: $dark
+    padding: 20px 0
+    font-weight: 400
+  .articles
+    h3
+      font-weight: 700
+      font-size: 20px
+      line-height: 1.4em
+      margin-bottom: 20px
+      +mq($medium-break)
+        font-size: 24px
+    ul
+      margin-left: 0
+    & > li
+      margin: 20px 0 50px
